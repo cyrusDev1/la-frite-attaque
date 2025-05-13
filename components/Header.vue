@@ -54,7 +54,7 @@ const menuLinks = ref([
   { text: "acceuil", to: "/" },
   { text: "la carte", to: "/la-carte" },
   { text: "la privatisation", to: "/la-privatisation" },
-  { text: "nos emplacements", to: "/emplacements" },
+  { text: "nos emplacements", to: "/nos-emplacements" },
 ]);
 
 const { $socials } = useNuxtApp();
