@@ -1,0 +1,48 @@
+name: Deploy to lafriteattaque FrontEnd Nuxt
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "21"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        env:
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+        run: npm run build
+
+      - name: Install sshpass
+        run: sudo apt-get install sshpass
+
+      - name: Deploy to server
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          HOST: ${{ secrets.SSH_HOST }}
+          USER: ${{ secrets.SSH_USERNAME }}
+        run: |
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
+            mkdir -p /home/lafriteattaque/htdocs/www.lafriteattaque.fr
+          EOF
+
+          sshpass -p "$SSH_PASSWORD" rsync -avz --delete --exclude='node_modules' ./ $USER@$HOST:/home/lafriteattaque/htdocs/www.lafriteattaque.fr
+
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
+            cd /home/lafriteattaque/htdocs/www.lafriteattaque.fr
+            npm install --production
+            npm run start
+          EOF
