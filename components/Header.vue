@@ -1,9 +1,9 @@
 <template>
   <div class="px-28 py-2 bg-beige flex justify-between items-center">
     <div>
-      <nuxt-link to="/">
+      <a href="/">
         <img class="w-3/5 object-cover" src="~/assets/images/logo.svg" alt="" />
-      </nuxt-link>
+      </a>
     </div>
     <div class="">
       <ul class="flex space-x-6">

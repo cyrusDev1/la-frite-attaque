@@ -36,13 +36,13 @@ jobs:
           USER: ${{ secrets.SSH_USERNAME }}
         run: |
           sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
-            mkdir -p /home/lafriteattaque/htdocs/www.lafriteattaque.fr
+            mkdir -p /home/lafriteattaque/htdocs/lafriteattaque.fr
           EOF
 
-          sshpass -p "$SSH_PASSWORD" rsync -avz --delete --exclude='node_modules' ./ $USER@$HOST:/home/lafriteattaque/htdocs/www.lafriteattaque.fr
+          sshpass -p "$SSH_PASSWORD" rsync -avz --delete --exclude='node_modules' ./ $USER@$HOST:/home/lafriteattaque/htdocs/lafriteattaque.fr
 
           sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
-            cd /home/lafriteattaque/htdocs/www.lafriteattaque.fr
+            cd /home/lafriteattaque/htdocs/lafriteattaque.fr
             npm install --production
             npm run start
           EOF
