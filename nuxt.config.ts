@@ -2,7 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
-
+  server: {
+    port: 3001,
+    host: '0.0.0.0',
+  },
   postcss: {
     plugins: {
       tailwindcss: {},
