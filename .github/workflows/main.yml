@@ -18,32 +18,38 @@ jobs:
         with:
           node-version: "21"
 
-      - name: Install dependencies
+      - name: Install dependencies locally
         run: npm install
 
-      - name: Build project
-        env:
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
-        run: npm run build
-
       - name: Install sshpass
-        run: sudo apt-get install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Deploy to server
+      - name: Deploy source code to server (excluding node_modules and build outputs)
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
           HOST: ${{ secrets.SSH_HOST }}
           USER: ${{ secrets.SSH_USERNAME }}
         run: |
-          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
-            mkdir -p /home/lafriteattaque/htdocs/lafriteattaque.fr
-          EOF
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST "mkdir -p /home/lafriteattaque/htdocs/lafriteattaque.fr"
 
-          sshpass -p "$SSH_PASSWORD" rsync -avz --delete --exclude='node_modules' ./ $USER@$HOST:/home/lafriteattaque/htdocs/lafriteattaque.fr
+          sshpass -p "$SSH_PASSWORD" rsync -avz --delete \
+            --exclude='node_modules' \
+            --exclude='.output' \
+            --exclude='.nuxt' \
+            ./ $USER@$HOST:/home/lafriteattaque/htdocs/lafriteattaque.fr
 
-          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
+      - name: Install dependencies and build on server, then restart PM2
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          HOST: ${{ secrets.SSH_HOST }}
+          USER: ${{ secrets.SSH_USERNAME }}
+        run: |
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << EOF
             cd /home/lafriteattaque/htdocs/lafriteattaque.fr
-            npm install --production
-          EOF
 
-          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST "pm2 restart lafriteattaque" || true
+            npm install --production
+            npm run build
+
+            # Restart PM2 app (remplace "lafriteattaque" par le nom correct)
+            pm2 restart lafriteattaque || true
+          EOF
