@@ -29,7 +29,7 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install sshpass
 
-      - name: Deploy to server
+      - name: Deploy to server via rsync
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
           HOST: ${{ secrets.SSH_HOST }}
@@ -39,10 +39,12 @@ jobs:
             mkdir -p /home/lafriteattaque/htdocs/lafriteattaque.fr
           EOF
 
-          sshpass -p "$SSH_PASSWORD" rsync -avz --delete --exclude='node_modules' --exclude='.output' --exclude='.nuxt' ./ $USER@$HOST:/home/lafriteattaque/htdocs/lafriteattaque.fr
+          sshpass -p "$SSH_PASSWORD" rsync -avz --delete .output/ $USER@$HOST:/home/lafriteattaque/htdocs/lafriteattaque.fr/.output
 
           sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
             cd /home/lafriteattaque/htdocs/lafriteattaque.fr
-            npm install --production
-            npm run start
+            chown -R $USER:$USER .output
+            chmod -R u+rwX .output
           EOF
+
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST "pm2 restart lafriteattaque" || true
