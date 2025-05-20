@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="w-full border-t border-l border-4 border-blue rounded-xl">
-        <Carte></Carte>
+        <!--Carte></Carte--->
       </div>
     </div>
   </div>
