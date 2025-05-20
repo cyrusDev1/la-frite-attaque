@@ -4,7 +4,15 @@
     <Quote></Quote>
     <Gallery></Gallery>
     <Products></Products>
-    <BrandIntro :presentations="presentations"></BrandIntro>
+    <div class="relative">
+      <Link
+        to="/nos-emplacements"
+        text="Ça donne faim ! Où puis-je vous trouver ?"
+        isolateClass="text-white border-blue"
+        class="text-nowrap bg-red w-fit absolute transform left-1/2 -translate-x-1/2 -top-3 z-40 text-base"
+      ></Link>
+      <BrandIntro :presentations="presentations"></BrandIntro>
+    </div>
     <About></About>
     <WhyChooseUs></WhyChooseUs>
     <Services></Services>
@@ -22,6 +30,17 @@
   </div>
 </template>
 <script setup>
+import Link from "~/components/ui/Link.vue";
+useHead({
+  title:
+    "La Frite Attaque – Food Truck de Burgers & Frites maisons en Rhône-Alpes",
+  meta: [
+    { name: "description", content: "Bienvenue chez La Frite Attaque !" },
+    { name: "viewport", content: "width=device-width, initial-scale=1" },
+  ],
+  link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+});
+
 import Hero from "~/components/Hero.vue";
 import Quote from "~/components/Quote.vue";
 import Gallery from "~/components/Gallery.vue";

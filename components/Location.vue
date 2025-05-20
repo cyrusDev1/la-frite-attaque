@@ -16,44 +16,47 @@
         la région lyonnaise.
       </p>
     </div>
-    <div class="lg:flex mt-10 gap-5 space-y-4 lg:space-y-0">
+    <div v-if="location" class="lg:flex mt-10 gap-5 space-y-4 lg:space-y-0">
       <div
         class="lg:w-2/5 px-4 lg:px-8 py-5 lg:py-10 border-t border-l border-4 border-blue rounded-xl"
       >
         <div class="pb-3 border-b border-black space-y-4">
           <Link
-            text="Limonest"
-            isolateClass="w-fit text-base bg-red hover:bg-orange"
+            :text="location.city"
+            isolateClass="w-fit text-white border-blue text-base bg-red"
             class="w-fit block"
           ></Link>
-          <span class="block text-sm">24 rue des Aulnes, 69760 Limonest</span>
+          <span class="block text-sm">{{ location.adresse }}</span>
         </div>
         <div class="py-3 border-b border-black space-y-4">
           <div>
-            <h4 class="text-sm">Tous les Jeudis</h4>
+            <h4 v-html="location.text_top_time" class="text-sm"></h4>
             <span class="text-sm font-poppins text-gray-800"
-              >12h00 - 13h30</span
+              >{{ location.time_start.slice(0, 5) }} -
+              {{ location.time_end.slice(0, 5) }}</span
             >
           </div>
           <div>
             <h4 class="text-sm">Commande</h4>
-            <span class="text-sm font-poppins text-gray-800"
-              >Sur place ou au
-              <a class="text-red underline" href="tel:06 68 51 15 46"
-                >06 68 51 15 46</a
-              ></span
-            >
+            <span
+              v-html="location.commande"
+              class="text-sm font-poppins text-gray-800"
+            ></span>
           </div>
         </div>
         <div class="py-3">
           <div>
-            <a class="text-red underline text-sm" href="#">Itineraire -></a>
+            <a
+              class="text-red underline text-sm"
+              :href="location.link_itinerary"
+              >Itineraire -></a
+            >
           </div>
         </div>
       </div>
-      <div
-        class="py-10 w-full border-t border-l border-4 border-blue rounded-xl"
-      ></div>
+      <div class="w-full border-t border-l border-4 border-blue rounded-xl">
+        <Carte></Carte>
+      </div>
     </div>
   </div>
 </template>
@@ -61,5 +64,9 @@
 <script setup>
 import Overlay from "./ui/Overlay.vue";
 import Link from "./ui/Link.vue";
+import Carte from "~/components/location/Carte.vue";
+import { useLocationStore } from "~/stores/locationStore";
+const locationStore = useLocationStore();
+const location = locationStore.location;
 </script>
 <style></style>

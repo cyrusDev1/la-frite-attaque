@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light-black relative py-10">
+  <div class="bg-light-black relative py-20">
     <img
       class="absolute z-20 -top-2 w-full"
       src="~/assets/images/svg/lightFillTop.svg"

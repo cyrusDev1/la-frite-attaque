@@ -25,11 +25,11 @@
       </p>
     </div>
     <div class="mt-5">
-      <Wrapper />
+      <WrapperPrivatisation />
     </div>
   </div>
 </template>
 <script setup>
 import Tag from "../ui/Tag.vue";
-import Wrapper from "../Wrapper.vue";
+import WrapperPrivatisation from "./WrapperPrivatisation.vue";
 </script>

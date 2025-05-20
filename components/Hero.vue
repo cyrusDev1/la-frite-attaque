@@ -18,19 +18,20 @@
         Sur 4 roues, on parcours le Rhônes Alpes pour délivrer nos meilleurs
         produits !
       </p>
-      <div
-        class="flex items-center space-x-2 transform -rotate-4 bg-clay-orange rounded-full w-fit mx-auto px-5 py-1"
+      <a
+        href="/nos-emplacements"
+        class="cursor-pointer flex items-center space-x-2 transform hover:scale-105 -rotate-4 bg-clay-orange rounded-full w-fit mx-auto px-5 py-1"
       >
         <span class="font-permanent font-bold text-white text-2xl"
           >Suivre nos traces</span
         >
         <Icon class="text-white text-2xl" name="ph:map-pin-fill" />
-      </div>
+      </a>
       <Scores></Scores>
       <div>
         <a
           class="bg-white w-fit mx-auto uppercase transform transition duration-500 hover:-rotate-3 hover:border-b-10 text-base py-2.5 px-4 border-x-5 border-t-5 border-b-8 rounded-xl block border-black"
-          href=""
+          href="/la-privatisation"
         >
           Privatiser le truck
         </a>

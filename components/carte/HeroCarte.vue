@@ -1,8 +1,8 @@
 <template>
   <div
-    class="bg-[#070035] relative md:flex w-full rounded-3xl md:rounded-[50px]"
+    class="bg-[#070035] h-fit relative flex flex-col md:flex-row w-full rounded-3xl md:rounded-[50px]"
   >
-    <div class="p-4 md:p-10 space-y-6">
+    <div class="basis-1/2 flex flex-col justify-between p-4 md:p-10 space-y-6">
       <h2 class="flex flex-col font-bold uppercase text-2xl md:text-3xl">
         <span class="text-beige">Attention</span>
         <span class="text-orange"> les papilles !</span>
@@ -13,7 +13,7 @@
       </p>
       <Link
         text="Réaliser une commande : avant 11h /18h)"
-        isolateClass="w-fit text-xs md:text-base text-center border-red hover:bg-red"
+        isolateClass="w-fit text-xs text-white md:text-sm text-center border-red"
       ></Link>
       <ul class="text-beige font-poppins space-y-3">
         <li>
@@ -30,9 +30,9 @@
         </li>
       </ul>
     </div>
-    <div class="p-2 flex justify-end">
+    <div class="basis-1/2 flex justify-end p-2">
       <img
-        class="object-cover rounded-3xl md:rounded-[50px]"
+        class="w-full md:w-4/5 object-cover rounded-3xl md:rounded-[50px]"
         src="~/assets/images/gallery/15.png"
         alt=""
       />

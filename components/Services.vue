@@ -17,8 +17,10 @@
       </p>
     </div>
     <div class="md:flex xl:px-20 space-y-5 md:space-y-0 mt-10 gap-5">
-      <div
-        class="md:w-1/2 group md:hover:w-3/5 h-[70vh] relative rounded-3xl md:rounded-[40px] transition-all duration-500"
+      <a
+        data-aos="zoom-in"
+        href="/la-carte"
+        class="md:w-1/2 block group md:hover:w-3/5 h-[70vh] relative rounded-3xl md:rounded-[40px] transition-all duration-500"
       >
         <div
           class="bg-gradient-to-t from-black/50 to-transparent rounded-3xl md:rounded-[40px] w-full h-full absolute z-30"
@@ -41,10 +43,12 @@
             mobile et gourmand !
           </p>
         </div>
-      </div>
+      </a>
 
-      <div
-        class="md:w-1/2 group md:hover:w-3/5 h-[70vh] relative rounded-3xl md:rounded-[40px] transition-all duration-500"
+      <a
+        data-aos="zoom-in"
+        href="la-carte-privatisation"
+        class="md:w-1/2 block group md:hover:w-3/5 h-[70vh] relative rounded-3xl md:rounded-[40px] transition-all duration-500"
       >
         <div
           class="bg-gradient-to-t from-black/50 to-transparent rounded-3xl md:rounded-[40px] w-full h-full absolute z-30"
@@ -67,10 +71,12 @@
             plats gourmands et raffinés !
           </p>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Overlay from "./ui/Overlay.vue";
+</script>
 <style></style>

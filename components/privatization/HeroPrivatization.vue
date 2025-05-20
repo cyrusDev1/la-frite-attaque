@@ -1,44 +1,56 @@
 <template>
-  <div class="bg overflow-hidden bg-[#2a2929] relative">
+  <div
+    :class="generatedPage ? 'bg-light-black' : 'bg bg-[#2a2929]'"
+    class="overflow-hidden relative"
+  >
     <BorderedImage
       :image="first"
-      class="w-[120px] md:w-[250px] transform -rotate-30 absolute top-0 -left-16"
+      class="w-[120px] md:w-[250px] transform -rotate-30 absolute z-10 top-0 -left-16"
     ></BorderedImage>
     <BorderedImage
       :image="second"
-      class="w-[120px] md:w-[250px] transform -rotate-30 absolute -right-16 bottom-0"
+      class="w-[120px] md:w-[250px] transform -rotate-30 absolute z-10 -right-16 bottom-12"
     ></BorderedImage>
     <BorderedImage
       :image="third"
-      class="w-[120px] md:w-[250px] transform rotate-30 absolute top-0 -right-16"
+      class="w-[120px] md:w-[250px] transform rotate-30 absolute z-10 top-0 -right-16"
     ></BorderedImage>
     <BorderedImage
       :image="four"
-      class="w-[120px] md:w-[250px] transform rotate-30 absolute -left-16 bottom-0"
+      class="w-[120px] md:w-[250px] transform rotate-30 absolute z-10 -left-16 bottom-12"
     ></BorderedImage>
-    <div class="md:w-1/2 mx-auto py-28 space-y-12">
+    <div class="md:w-1/2 mx-auto relative z-20 py-20 space-y-12">
       <div class="space-y-4">
-        <h2 class="text-4xl text-white font-bold text-center">
-          Découvrons la carte traiteur Lyon, Roanne...
+        <h2
+          v-if="!generatedPage"
+          class="text-4xl text-white font-bold capitalize text-center"
+        >
+          {{ data.title }}
+        </h2>
+        <h2
+          v-else
+          class="text-xl md:text-3xl text-white font-bold text-center lg:leading-loose font-poppins"
+        >
+          <span class="bg-clay-orange rounded-full px-4">Privatiser</span> un
+          <span class="bg-clay-orange rounded-full px-4">food truck</span> pour
+          un évènement
+          <span class="text-nowrap" v-html="data.title"></span>
         </h2>
         <span class="text-white block font-poppins text-center"
           >soyez le boss de votre event !</span
         >
         <p class="text-white block font-poppins text-center">
-          Faites de votre événement en Auvergne Rhônes Alpes une célébration
-          gourmande avec la privatisation de votre food truck de burgers, crêpes
-          et Bubble Waffle. Découvrez une cuisine de rue créative et savoureuse,
-          parfaite pour impressionner vos invités.
+          {{ data.description }}
         </p>
         <Scores></Scores>
       </div>
       <div class="space-y-10">
         <div class="flex justify-center">
           <a
-            href=""
-            class="bg-white text-center w-fit hover:-rotate-6 block transition-all transform px-3 py-2 rounded text-sm border-2"
+            :href="data.link.to"
+            class="bg-white text-center max-w-80 hover:-rotate-6 block transition-all transform px-3 py-2 rounded text-sm border-2"
           >
-            Découvrir la carte traiteur
+            {{ data.link.text }}
           </a>
         </div>
         <div class="space-y-4">
@@ -55,6 +67,10 @@
   </div>
 </template>
 <script setup>
+const props = defineProps({
+  generatedPage: Boolean,
+  data: Object,
+});
 import BorderedImage from "../ui/BorderedImage.vue";
 import OurCustomers from "../ui/OurCustomers.vue";
 import Scores from "../ui/Scores.vue";

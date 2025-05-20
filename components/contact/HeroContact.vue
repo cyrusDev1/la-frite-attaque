@@ -1,13 +1,13 @@
 <template>
   <div class="bg-light-black pt-20 md:pt-32 pb-56 relative">
-    <div class="px-5 md:px-28 space-y-4 md:w-1/2 relative">
+    <div class="px-5 md:px-28 space-y-4 lg:w-1/2 relative">
       <Tag
         text="miam maim"
-        class="absolute rotate-8 left-0 -top-10 text-sm bg-green"
+        class="absolute rotate-8 left-5 md:left-28 -top-10 text-sm bg-green"
       ></Tag>
       <Tag
         text="sucré / salé"
-        class="absolute right-0 md:right-1/2 -top-12 text-sm bg-clay-orange"
+        class="absolute right-0 md:right-1/4 -top-12 text-sm bg-clay-orange"
       ></Tag>
       <h3 class="text-white text-xl md:text-2xl">Food Truck ou Traiteur ?</h3>
       <p class="text-white text-base font-poppins">

@@ -21,6 +21,13 @@
   font-weight: 400;
   font-style: normal;
 }
+@font-face {
+  font-family: "RumRaisin";
+  src: url("@/assets/fonts/RumRaisin-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   font-family: "DelaGothicOne";
 }

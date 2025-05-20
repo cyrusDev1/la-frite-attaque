@@ -11,10 +11,11 @@ module.exports = {
   theme: {
     extend: {
       borderWidth: {
-        1: "1px", // border-1
-        5: "5px", // border-3
-        8: "8px", // border-6
-        10: "10px", // border-12
+        1: "1px",
+        5: "5px",
+        6: "6px",
+        8: "8px",
+        10: "10px",
       },
       backgroundImage: {
         "fade-bottom":
@@ -54,6 +55,7 @@ module.exports = {
       fontFamily: {
         permanent: ['"PermanentMarker"', "cursive"],
         poppins: ['"Poppins"', "no-serif"],
+        RumRaisin: ['"RumRaisin"', "no-serif"],
       },
       screens: {
         screens: {

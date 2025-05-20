@@ -10,4 +10,5 @@ export default defineNuxtConfig({
   },
 
   modules: ["@nuxt/icon"],
+  plugins: ["~/plugins/aos.client.ts", "~/plugins/pinia.js"],
 });

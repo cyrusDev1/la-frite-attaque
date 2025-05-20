@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-beige relative">
+  <div class="bg-beige-light relative">
     <div
       class="px-5 lg:px-28 pt-20 pb-20 lg:pb-44 lg:flex space-y-10 lg:space-y-0 lg:space-x-10 justify-between items-center"
     >
@@ -19,8 +19,9 @@
         </p>
         <Link
           text="Voir plus"
-          isolateClass="w-fit text-base bg-red hover:bg-orange"
+          isolateClass="w-fit text-white border-blue text-base bg-red hover:bg-orange"
           class="w-fit"
+          to="/la-privatisation"
         ></Link>
       </div>
 

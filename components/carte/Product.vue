@@ -12,7 +12,7 @@
       }}</span>
     </div>
     <div class="md:flex md:space-x-5 md:space-y-0 space-y-5 items-center">
-      <div class="md:w-1/3 bg-">
+      <div class="md:w-1/3">
         <img
           class="rounded-2xl"
           src="~/assets/images/products/burger-maison.jpg"
@@ -27,7 +27,7 @@
         <div class="flex justify-center space-x-4">
           <div
             v-for="(value, name) in product.labels"
-            :key="index"
+            :key="name"
             class="flex flex-col items-center space-y-1.5"
           >
             <span

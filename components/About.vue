@@ -10,7 +10,7 @@
         <img
           class="h-[60vh] lg:size-[500px] object-cover border-b-8 border-r-8 border-orange rounded-2xl"
           src="~/assets/images/about.jpg"
-          alt=""
+          alt="image à propos"
         />
       </div>
       <div class="lg:w-1/2">
@@ -45,8 +45,9 @@
           </p>
           <Link
             text="Voir plus"
-            isolateClass="w-fit text-sm lg:text-base bg-red hover:bg-orange"
+            isolateClass="w-fit text-white border-blue text-sm lg:text-base bg-red hover:bg-orange"
             class="absolute right-8 -bottom-4"
+            to="/la-carte"
           ></Link>
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-3 gap-5 mt-10">

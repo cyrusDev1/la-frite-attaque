@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-beige relative">
+  <div class="bg-beige-light relative">
     <div
       class="px-5 lg:px-28 pt-20 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-10 justify-between items-center"
     >
       <div class="space-y-5">
-        <Overlay text="Contact"></Overlay>
+        <Overlay text="Privatisation"></Overlay>
         <h2 class="text-outline text-white text-2xl lg:text-4xl">
           Nos Coordonnées
         </h2>
@@ -104,17 +104,36 @@
       <div
         class="rounded-2xl transform relative border-t border-l border-5 border-blue px-2 sm:px-5 py-6"
       >
+        <div
+          :class="isSubmit ? 'block' : 'hidden'"
+          class="absolute z-40 w-full bg-white bg-opacity-50 rounded-2xl inset-0 h-full"
+        ></div>
+
         <div class="py-5">
-          <form class="font-poppins" action="">
+          <form @submit.prevent="submitForm" class="font-poppins" action="">
             <div class="space-y-5">
               <div class="flex space-x-5">
                 <div class="flex space-x-2 items-center">
-                  <input class="size-5" type="radio" name="role" />
-                  <label class="text-lg" for="">Particulier</label>
+                  <input
+                    v-model="form.role"
+                    id="Particulier"
+                    class="size-5"
+                    type="radio"
+                    value="Particulier"
+                    name="role"
+                  />
+                  <label class="text-lg" for="Particulier">Particulier</label>
                 </div>
                 <div class="flex space-x-2 items-center">
-                  <input class="size-5" type="radio" name="role" />
-                  <label class="text-lg" for="">Professionel</label>
+                  <input
+                    v-model="form.role"
+                    id="Professionel"
+                    class="size-5"
+                    type="radio"
+                    value="Professionel"
+                    name="role"
+                  />
+                  <label class="text-lg" for="Professionel">Professionel</label>
                 </div>
               </div>
               <div
@@ -123,11 +142,13 @@
                 <input
                   type="text"
                   placeholder="Nom"
+                  v-model="form.nom"
                   class="py-3 px-5 w-full rounded-full border border-blue outline-none"
                 />
                 <input
                   type="text"
                   placeholder="Prénom"
+                  v-model="form.prenom"
                   class="py-3 px-5 w-full rounded-full border border-blue outline-none"
                 />
               </div>
@@ -137,11 +158,13 @@
                 <input
                   type="email"
                   placeholder="E-mail"
+                  v-model="form.email"
                   class="py-3 px-5 w-full rounded-full border border-blue outline-none"
                 />
                 <input
                   type="tel"
                   placeholder="Téléphone"
+                  v-model="form.telephone"
                   class="py-3 px-5 w-full rounded-full border border-blue outline-none"
                 />
               </div>
@@ -153,16 +176,21 @@
                   class="py-3 px-5 rounded-full w-full border border-blue bg-white outline-none"
                   name=""
                   id=""
+                  v-model="form.evenement"
                 >
                   <option value="">Type d'évènement</option>
-                  <option value="">Évènement sportif</option>
-                  <option value="">Évènement privé</option>
-                  <option value="">Évènement profesionnel</option>
-                  <option value="">Festival</option>
+                  <option value="Évènement sportif">Évènement sportif</option>
+                  <option value="Évènement privé">Évènement privé</option>
+                  <option value="Évènement profesionnel">
+                    Évènement profesionnel
+                  </option>
+                  <option value="Festival">Festival</option>
                 </select>
                 <input
                   type="number"
                   placeholder="Nombre de personnes"
+                  v-model="form.nombre"
+                  min="1"
                   class="py-3 px-5 w-full rounded-full border border-blue outline-none"
                 />
               </div>
@@ -172,15 +200,18 @@
                 <input
                   type="text"
                   placeholder="Lieu"
+                  v-model="form.lieu"
                   class="py-3 px-5 w-full rounded-full border border-blue outline-none"
                 />
                 <input
                   type="date"
+                  v-model="form.date"
                   class="py-3 px-5 w-full rounded-full border border-blue outline-none"
                 />
               </div>
               <div>
                 <textarea
+                  v-model="form.message"
                   placeholder="Donnez-nous un peu plus de détails sur votre demande 
 de privatisation, nous reviendrons rapidement vers vous."
                   class="w-full h-48 py-3 px-5 rounded-2xl border border-blue bg-white outline-none"
@@ -201,9 +232,57 @@ de privatisation, nous reviendrons rapidement vers vous."
 
 <script setup>
 import Overlay from "../ui/Overlay.vue";
-import Link from "../ui/Link.vue";
 import Button from "../ui/Button.vue";
 
+const { $toast } = useNuxtApp();
 const { $socials } = useNuxtApp();
+import { post } from "~/utils/api";
+
+const form = ref({
+  role: "",
+  nom: "",
+  prenom: "",
+  email: "",
+  telephone: "",
+  evenement: "",
+  nombre: "",
+  lieu: "",
+  date: "",
+  message: "",
+});
+const isSubmit = ref(false);
+const submitForm = async () => {
+  const data = form.value;
+  isSubmit.value = true;
+  if (
+    data.role &&
+    data.date &&
+    data.lieu &&
+    data.nombre &&
+    data.nombre >= 1 &&
+    data.nom &&
+    data.prenom &&
+    data.email &&
+    data.telephone &&
+    data.evenement &&
+    data.message
+  ) {
+    try {
+      await post("privatization", data);
+      Object.keys(form.value).forEach((key) => {
+        form.value[key] = "";
+      });
+      $toast.success("Demande de privatisation envoyé avec succès !");
+      isSubmit.value = false;
+    } catch (e) {
+      console.error(e);
+      $toast.error("Une erreur s'est produite ! Veuillez réessayer");
+      isSubmit.value = false;
+    }
+  } else {
+    $toast.error("Veuillez bien remplir tous les champs !");
+    isSubmit.value = false;
+  }
+};
 </script>
 <style></style>

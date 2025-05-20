@@ -14,13 +14,17 @@
       class="mt-32 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-32"
     >
       <div
+        data-aos="fade-up"
+        :data-aos-duration="(index + 1) * 100"
         v-for="(product, index) in products"
         :key="index"
         class="relative space-y-4 border-t border-l border-5 rounded-xl bg-white pt-32 pb-16 px-5"
         :class="`border-${product.blocBorderColor}`"
       >
         <h2 class="capitalize text-center text-xl md:text-2xl">
-          {{ product.title }}
+          <a :href="`/la-carte-privatisation/#${product.ancre}`">{{
+            product.title
+          }}</a>
         </h2>
         <p
           class="font-poppins text-base leading-snug text-center text-gray-600"
@@ -29,15 +33,23 @@
         </p>
         <div class="flex justify-center">
           <div class="absolute -top-1/4">
-            <img
-              :alt="product.title"
-              :class="`border-${product.imageBorderColor}`"
-              class="size-40 md:size-52 border-t border-l aspect-square object-cover border-5 rounded-full"
-              :src="product.image"
-            />
+            <a :href="`/la-carte-privatisation/#${product.ancre}`">
+              <img
+                :alt="product.title"
+                :class="`border-${product.imageBorderColor}`"
+                class="size-40 md:size-52 border-t border-l aspect-square object-cover border-5 rounded-full"
+                :src="product.image"
+              />
+            </a>
           </div>
         </div>
       </div>
+    </div>
+    <div class="flex justify-center w-1/2 mx-auto mt-10">
+      <p class="text-center text-sm font-poppins">
+        *Notre carte évolue en fonction des saisons et de l’envie du chefet de
+        la disponibilité de nos partenaires !
+      </p>
     </div>
   </div>
 </template>
@@ -56,6 +68,7 @@ const products = ref([
     image: burgerImage,
     blocBorderColor: "orange",
     imageBorderColor: "red",
+    ancre: "Burgers",
   },
   {
     title: "nos frites",
@@ -64,6 +77,7 @@ const products = ref([
     image: frittes,
     imageBorderColor: "orange",
     blocBorderColor: "blue",
+    ancre: "frites",
   },
   {
     title: "nos boissons",
@@ -72,6 +86,7 @@ const products = ref([
     image: freshDrink,
     imageBorderColor: "blue",
     blocBorderColor: "red",
+    ancre: "Boissons",
   },
   {
     title: "nos desserts",
@@ -80,6 +95,7 @@ const products = ref([
     image: dessertCream,
     imageBorderColor: "red",
     blocBorderColor: "blue",
+    ancre: "Dessert",
   },
 ]);
 </script>

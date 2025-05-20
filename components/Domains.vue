@@ -1,5 +1,23 @@
 <template>
-  <div class="bg-beige px-5 md:px-28 py-20 space-y-10">
+  <div class="bg-beige px-5 md:px-28 py-20 space-y-10 relative">
+    <div class="">
+      <div
+        class="absolute left-2 md:left-28 -top-10 z-50 bg-sunbeam py-6 w-fit text-center rounded-2xl p-3 border-t border-l border-4 border-red"
+      >
+        <h2 class="text-azure text-xl lg:text-3xl font-bold">70 +</h2>
+        <span class="text-azure text-xs leading-3">Évènements par an</span>
+      </div>
+      <div
+        class="absolute hidden sm:block right-2 md:right-28 -top-10 z-50 bg-sunbeam w-fit text-center rounded-2xl p-3 border-t border-l border-4 border-red"
+      >
+        <h2 class="text-azure text-xl lg:text-3xl font-bold">85 %</h2>
+        <span class="text-azure text-xs leading-3"
+          >de nos clients réservent à nouveau <br />
+          Preuve que le goût ça marque !
+        </span>
+      </div>
+    </div>
+
     <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
       <div
         class="space-y-2 flex flex-col items-center justify-center"
@@ -15,13 +33,15 @@
         <h3 class="capitalize text-center">{{ item.name }}</h3>
       </div>
     </div>
-    <div class="flex justify-center">
+    <div class="flex justify-center items-center">
+      <span class="border-t w-full h-0.5 border-gray-500"></span>
       <a
-        href=""
-        class="bg-white hover:-rotate-2 text-center w-fit block transition-all transform px-3 py-3 rounded text-sm border-t border-l border-4 border-black"
+        href="/la-privatisation"
+        class="bg-white hover:-rotate-2 text-nowrap text-center w-fit block transition-all transform px-3 py-3 rounded text-sm border-t border-l border-4 border-black"
       >
-        Découvrir la carte traiteur
+        {{ link.text }}
       </a>
+      <span class="border-t w-full h-0.5 border-gray-500"></span>
     </div>
     <div
       class="md:flex justify-center md:space-x-10 space-y-6 md:space-y-0 md:px-10"
@@ -36,7 +56,8 @@
         </p>
         <Link
           text="Contactez-nous"
-          isolateClass="w-fit text-base bg-red hover:bg-orange"
+          to="/contact"
+          isolateClass="w-fit text-base  border-blue text-white bg-red hover:bg-orange"
         ></Link>
       </div>
       <div class="md:w-1/2 space-y-4">
@@ -51,18 +72,22 @@
         </ul>
         <Link
           text="Réservez le Foodtruck"
-          isolateClass="w-fit text-base bg-orange hover:bg-red"
+          isolateClass="w-fit text-base border-blue text-white bg-orange hover:bg-red"
+          to="/la-privatisation"
         ></Link>
       </div>
     </div>
   </div>
 </template>
 <script setup>
+const props = defineProps({
+  link: Object,
+});
 import Link from "./ui/Link.vue";
 
 const domains = ref([
   { name: "festival", icon: "mingcute:music-line" },
-  { name: "Évènement Sportif", icon: "solar:basketball-outline" },
+  { name: "Évènement Sportif", icon: "streamline:ball" },
   { name: "mariage", icon: "hugeicons:wedding" },
   { name: "soirée", icon: "emojione-monotone:clinking-glasses" },
   { name: "séminaire", icon: "typcn:mortar-board" },

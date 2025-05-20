@@ -13,51 +13,40 @@
         l’instant magique.
       </p>
     </div>
+
     <div class="px-2 lg:px-36 h-screen relative overflow-hidden">
       <div
         class="absolute top-0 left-0 w-full h-52 bg-gradient-to-b from-light-black to-transparent z-10"
-      ></div>
+      />
       <div
         class="absolute bottom-0 left-0 w-full h-52 bg-gradient-to-t from-light-black to-transparent z-10"
-      ></div>
+      />
 
-      <div id="gallery-columns" class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-        <div
-          class="space-y-2 transition-all duration-500"
-          :class="{
-            'translate-y-0 opacity-100': isVisible,
-            '-translate-y-56': !isVisible,
-          }"
-        >
+      <div ref="gallery" class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="gallery-col space-y-2">
           <img class="w-full" src="~/assets/images/gallery/01.jpg" alt="" />
           <img class="w-full" src="~/assets/images/gallery/02.jpg" alt="" />
           <img class="w-full" src="~/assets/images/gallery/03.jpg" alt="" />
+          <img class="w-full" src="~/assets/images/gallery/11.jpg" alt="" />
+          <img class="w-full" src="~/assets/images/gallery/06.jpg" alt="" />
         </div>
-        <div
-          class="space-y-2 transition-all duration-500 delay-300"
-          :class="{
-            'translate-y-0 opacity-100': isVisible,
-            '-translate-y-56': !isVisible,
-          }"
-        >
+        <div class="gallery-col space-y-2">
           <img class="w-full" src="~/assets/images/gallery/07.jpg" alt="" />
           <img class="w-full" src="~/assets/images/gallery/05.jpg" alt="" />
           <img class="w-full" src="~/assets/images/gallery/06.jpg" alt="" />
           <img class="w-full" src="~/assets/images/gallery/02.jpg" alt="" />
+          <img class="w-full" src="~/assets/images/gallery/09.jpg" alt="" />
         </div>
-        <div
-          class="space-y-2 transition-all duration-500 delay-400"
-          :class="{
-            'translate-y-0 opacity-100': isVisible,
-            '-translate-y-56': !isVisible,
-          }"
-        >
+        <div class="gallery-col space-y-2">
           <img class="w-full" src="~/assets/images/gallery/10.jpg" alt="" />
           <img class="w-full" src="~/assets/images/gallery/09.jpg" alt="" />
           <img class="w-full" src="~/assets/images/gallery/11.jpg" alt="" />
+          <img class="w-full" src="~/assets/images/gallery/01.jpg" alt="" />
+          <img class="w-full" src="~/assets/images/gallery/02.jpg" alt="" />
         </div>
       </div>
     </div>
+
     <div
       class="absolute w-full lg:w-2/3 flex lg:left-1/2 transform lg:-translate-x-1/2 z-40 -bottom-20"
     >
@@ -65,22 +54,36 @@
     </div>
   </div>
 </template>
+
 <script setup>
-import { ref, onMounted } from "vue";
+import { onMounted, ref } from "vue";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import Wrapper from "./Wrapper.vue";
-const isVisible = ref(false);
+
+const gallery = ref(null);
 
 onMounted(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      isVisible.value = entry.isIntersecting;
-    },
-    {
-      threshold: 0.3,
-    },
-  );
+  gsap.registerPlugin(ScrollTrigger);
 
-  const target = document.querySelector("#gallery-columns");
-  if (target) observer.observe(target);
+  const images = gallery.value.querySelectorAll("div");
+
+  images.forEach((imgBloc, index) => {
+    gsap.fromTo(
+      imgBloc,
+      { y: 0 },
+      {
+        y: -600,
+        ease: "power2.out",
+        delay: index * 0.5,
+        scrollTrigger: {
+          trigger: imgBloc,
+          start: "top 0%",
+          toggleActions: "play none none none",
+          scrub: true,
+        },
+      },
+    );
+  });
 });
 </script>

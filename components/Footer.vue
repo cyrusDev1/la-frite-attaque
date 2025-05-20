@@ -1,9 +1,9 @@
 <template>
   <div class="bg-red py-10 px-5 xl:px-28">
     <div class="flex flex-col justify-center items-center">
-      <div>
+      <a href="/">
         <img class="object-cover" src="~/assets/images/logo.svg" alt="" />
-      </div>
+      </a>
       <p class="font-poppins text-white md:w-1/2 text-center text-sm">
         La Frite Attaque, votre traiteur & food truck de référence à Lyon,
         Roanne, Saint-Etienne, Macon, Bourg en Bresse... chez vous : en Rhône
@@ -17,12 +17,12 @@
         <p class="font-poppins text-white text-center">
           Notre adresse du jour (pour manger)
         </p>
-        <h3 class="text-white text-lg text-center">
-          24 rue des Aulnes, 69760 Limonest
+        <h3 v-if="location?.adresse" class="text-white text-lg text-center">
+          {{ location.adresse }}
         </h3>
         <div class="flex justify-center py-4">
           <a
-            class="bg-white px-6 rounded-full text-sm text-azure py-2.5"
+            class="hidden bg-white px-6 rounded-full text-sm text-azure py-2.5"
             href=""
             >Commander</a
           >
@@ -35,28 +35,28 @@
             <li>
               <a
                 class="hover:text-orange transition-all text-white font-poppins"
-                href=""
+                href="/la-carte/#burgers"
                 >Les Burgers</a
               >
             </li>
             <li>
               <a
                 class="hover:text-orange transition-all text-white font-poppins"
-                href=""
+                href="/la-privatisation"
                 >La Privatisation</a
               >
             </li>
             <li>
               <a
                 class="hover:text-orange transition-all text-white font-poppins"
-                href=""
+                href="#"
                 >Mentions Légales</a
               >
             </li>
             <li>
               <a
                 class="hover:text-orange transition-all text-white font-poppins"
-                href=""
+                href="#"
                 >Politique de confidentialité</a
               >
             </li>
@@ -123,7 +123,8 @@
             >
               <a
                 class="text-xl flex items-center justify-center w-full h-full"
-                href=""
+                :href="social.to"
+                target="_blank"
               >
                 <Icon :name="social.icon" />
               </a>
@@ -136,4 +137,7 @@
 </template>
 <script setup>
 const { $socials } = useNuxtApp();
+import { useLocationStore } from "~/stores/locationStore";
+const locationStore = useLocationStore();
+const location = locationStore.location;
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-beige-light px-5 lg:px-28 py-20">
+  <div class="bg-beige px-5 lg:px-28 py-20">
     <div class="flex justify-center">
       <Overlay
         text="J’espère que vous avez encore faim après dégusté autant d’image savoureuse !"

@@ -9,6 +9,7 @@
         voyage culinaire dans votre food truck “ La Frite Attaque “
       </p>
     </div>
+
     <div
       ref="containerRef"
       class="flex flex-nowrap space-x-4 overflow-scroll lg:overflow-hidden w-full pt-20 pb-36 px-5"
@@ -16,12 +17,12 @@
       <div
         v-for="(item, index) in testimonials"
         :key="index"
+        :ref="(el) => (testimonialRefs[index] = el)"
         :class="[
           item.rotateClass,
           'transition-transform duration-[1000ms] ease-in-out',
-          isVisible ? 'translate-x-0' : '-translate-x-full',
+          'transform border-4 w-[200vw] md:w-[40vw] flex-shrink-0 border-black rounded-lg px-4 py-4 flex items-center space-x-4',
         ]"
-        class="transform transition-all border-4 w-[200vw] md:w-[40vw] flex-shrink-0 border-black rounded-lg px-4 py-4 flex items-center space-x-4"
       >
         <img class="rounded-full w-20" :src="item.pic" alt="" />
         <div>
@@ -39,34 +40,22 @@
     </div>
   </div>
 </template>
+
 <script setup>
+import { ref, onMounted, nextTick } from "vue";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
 import one from "~/assets/images/testimonials/01.png";
 import two from "~/assets/images/testimonials/02.png";
 import three from "~/assets/images/testimonials/03.png";
 
-import { ref, onMounted } from "vue";
+gsap.registerPlugin(ScrollTrigger);
 
-const isVisible = ref(false);
 const containerRef = ref(null);
+const testimonialRefs = []; // tableau de refs dynamiques (pas ref() ici !)
 
-onMounted(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        isVisible.value = entry.isIntersecting;
-      });
-    },
-    {
-      threshold: 0.7,
-    },
-  );
-
-  if (containerRef.value) {
-    observer.observe(containerRef.value);
-  }
-});
-
-const testimonials = ref([
+const testimonials = [
   {
     text: "Si j'avais su qu'un burger pouvait être aussi bon, j'aurais privatisé. L'Instant pour mon mariage... et mon divorce !",
     starCount: 5,
@@ -85,5 +74,28 @@ const testimonials = ref([
     pic: three,
     rotateClass: "-rotate-8",
   },
-]);
+];
+
+onMounted(async () => {
+  await nextTick();
+
+  testimonialRefs.forEach((el) => {
+    if (!el) return;
+    gsap.fromTo(
+      el,
+      { x: 0 },
+      {
+        x: -500,
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom",
+          toggleActions: "play none none none",
+          scrub: true,
+        },
+        duration: 2,
+        ease: "none",
+      },
+    );
+  });
+});
 </script>

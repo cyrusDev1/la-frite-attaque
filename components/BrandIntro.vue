@@ -5,6 +5,7 @@
         v-for="(item, index) in presentations"
         :key="index"
         :class="(index + 1) % 2 == 0 ? 'lg:flex flex-row-reverse' : 'lg:flex'"
+        :data-aos="(index + 1) % 2 == 0 ? 'fade-up-right' : 'fade-down-left'"
         class="justify-between items-center"
       >
         <div class="lg:w-1/2 space-y-8">
@@ -24,6 +25,7 @@
             :class="item.absoluteImagePosition"
             :src="item.absoluteImage"
             alt=""
+            :ref="(el) => (images[index] = el)"
           />
           <img
             :class="(index + 1) % 2 == 0 ? '-rotate-12' : 'rotate-12'"
@@ -42,10 +44,32 @@
   </div>
 </template>
 <script setup>
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+const images = ref([]);
+
 const props = defineProps({
   presentations: {
     type: Array,
     required: true,
   },
+});
+
+onMounted(() => {
+  images.value.forEach((img, i) => {
+    gsap.set(img, {
+      rotate: 0,
+      y: 0,
+    });
+
+    gsap.to(img, {
+      y: `${20}px`,
+      duration: 2,
+      repeat: -1, // boucle infinie
+      yoyo: true, // revient à l’état initial
+      ease: "power1.inOut",
+    });
+  });
 });
 </script>
