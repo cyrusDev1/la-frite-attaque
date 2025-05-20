@@ -39,6 +39,10 @@ jobs:
             mkdir -p /home/lafriteattaque/htdocs/lafriteattaque.fr
           EOF
 
+          sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
+            sudo chown -R $USER:$USER /home/lafriteattaque/htdocs/lafriteattaque.fr
+          EOF
+
           sshpass -p "$SSH_PASSWORD" rsync -avz --delete .output/ $USER@$HOST:/home/lafriteattaque/htdocs/lafriteattaque.fr/.output
 
           sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << 'EOF'
