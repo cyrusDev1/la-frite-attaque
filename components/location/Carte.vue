@@ -12,6 +12,12 @@ const mapRef = ref(null);
 
 onMounted(async () => {
   const L = await import("leaflet");
+  L.Icon.Default.mergeOptions({
+  iconRetinaUrl: '/leaflet/marker-icon-2x.png',
+  iconUrl: '/leaflet/marker-icon.png',
+  shadowUrl: '/leaflet/marker-shadow.png',
+});
+
   await import("leaflet/dist/leaflet.css");
 
   const map = L.map(mapRef.value).setView(
