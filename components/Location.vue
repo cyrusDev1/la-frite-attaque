@@ -18,7 +18,7 @@
     </div>
     <div v-if="location" class="lg:flex mt-10 gap-5 space-y-4 lg:space-y-0">
       <div
-        class="lg:w-2/5 px-4 lg:px-8 py-5 lg:py-10 border-t border-l border-4 border-blue rounded-xl"
+        class="lg:w-2/5 px-4 py-5 lg:py-10 border-t border-l border-4 border-blue rounded-xl"
       >
         <div class="pb-3 border-b border-black space-y-4">
           <Link
@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="w-full border-t border-l border-4 border-blue rounded-xl">
-        <!--Carte></Carte--->
+        <Carte :location="location"></Carte>
       </div>
     </div>
   </div>

@@ -20,7 +20,7 @@
       </div>
       <div class="mt-5">
         <a
-          href=""
+          href="/privatiser"
           class="bg-white hover:-rotate-6 block transition-all transform px-3 py-2 rounded text-sm border-2"
           >Privatiser</a
         >

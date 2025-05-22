@@ -30,18 +30,21 @@ const textRef = ref(null);
 // Register plugin
 gsap.registerPlugin(ScrollTrigger);
 
-onMounted(() => {
-  gsap.set(textRef.value, {
-    x: 0,
-  });
+onMounted(async () => {
+  await nextTick();
+  await new Promise((resolve) => setTimeout(resolve, 100)); // petite pause de 50ms
+  const textWidth = textRef.value.offsetWidth;
+
+  gsap.set(textRef.value, { x: 0 });
 
   gsap.to(textRef.value, {
     scrollTrigger: {
       trigger: containerRef.value,
-      start: "top bottom",
+      start: "top center",
+      end: "bottom center",
       scrub: true,
     },
-    x: -600,
+    x: -500,
     ease: "none",
   });
 });

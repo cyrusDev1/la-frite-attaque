@@ -3,41 +3,35 @@
 </template>
 
 <script setup>
+const props = defineProps({
+  location: Object,
+});
 import { onMounted, ref } from "vue";
 
 const mapRef = ref(null);
 
-const latitude = 48.8566;
-const longitude = 2.3522;
-
 onMounted(async () => {
-  if (typeof window !== "undefined") {
-    // Charge Google Maps JS API
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=VOTRE_API_KEY`;
-    script.async = true;
-    script.defer = true;
+  const L = await import("leaflet");
+  await import("leaflet/dist/leaflet.css");
 
-    script.onload = () => {
-      const map = new window.google.maps.Map(mapRef.value, {
-        center: { lat: latitude, lng: longitude },
-        zoom: 15,
-      });
+  const map = L.map(mapRef.value).setView(
+    [props.location.latitude, props.location.longitude],
+    14,
+  );
 
-      new window.google.maps.Marker({
-        position: { lat: latitude, lng: longitude },
-        map,
-        title: "Food Truck",
-      });
-    };
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">Openstreetmap</a>',
+  }).addTo(map);
 
-    document.head.appendChild(script);
-  }
+  L.marker([props.location.latitude, props.location.longitude])
+    .addTo(map)
+    .bindPopup(props.location.adresse);
 });
 </script>
 
 <style scoped>
 div {
-  min-height: 300px;
+  min-height: 400px;
 }
 </style>

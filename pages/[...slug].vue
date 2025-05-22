@@ -74,9 +74,7 @@ useHead(() => {
             content: `Découvrez La Frite Attaque en région ${pageData.value.value}`,
           },
         ],
-        link: [
-          { rel: "icon", type: "image/png", href: "/favicon.png" }
-        ],
+        link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       };
 
     case "departement":
@@ -88,9 +86,7 @@ useHead(() => {
             content: `Découvrez La Frite Attaque dans le département ${pageData.value.value}`,
           },
         ],
-        link: [
-          { rel: "icon", type: "image/png", href: "/favicon.png" }
-        ],
+        link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       };
 
     case "city":
@@ -102,9 +98,7 @@ useHead(() => {
             content: `Découvrez La Frite Attaque dans la ville ${pageData.value.value}`,
           },
         ],
-        link: [
-          { rel: "icon", type: "image/png", href: "/favicon.png" }
-        ],
+        link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       };
 
     case "category":
@@ -116,9 +110,7 @@ useHead(() => {
             content: `Découvrez La Frite Attaque pour la catégorie ${pageData.value.value}`,
           },
         ],
-        link: [
-          { rel: "icon", type: "image/png", href: "/favicon.png" }
-        ],
+        link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       };
 
     case "region+category":
@@ -130,9 +122,7 @@ useHead(() => {
             content: `Découvrez La Frite Attaque en ${pageData.value.zone} pour la catégorie ${pageData.value.cat}`,
           },
         ],
-        link: [
-          { rel: "icon", type: "image/png", href: "/favicon.png" }
-        ],
+        link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       };
 
     case "departement+category":
@@ -144,9 +134,7 @@ useHead(() => {
             content: `Découvrez La Frite Attaque dans le département ${pageData.value.zone} pour la catégorie ${pageData.value.cat}`,
           },
         ],
-        link: [
-          { rel: "icon", type: "image/png", href: "/favicon.png" }
-        ],
+        link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       };
 
     case "city+category":
@@ -158,22 +146,17 @@ useHead(() => {
             content: `Découvrez La Frite Attaque dans la ville ${pageData.value.zone} pour la catégorie ${pageData.value.cat}`,
           },
         ],
-        link: [
-          { rel: "icon", type: "image/png", href: "/favicon.png" }
-        ],
+        link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       };
 
     default:
       return {
         title: "Page non trouvée – La Frite Attaque",
         meta: [{ name: "description", content: "Page non trouvée" }],
-        link: [
-          { rel: "icon", type: "image/png", href: "/favicon.png" }
-        ],
+        link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
       };
   }
 });
-
 
 const link = ref({
   text: "Découvrir la carte traiteur",

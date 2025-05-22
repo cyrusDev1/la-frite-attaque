@@ -38,7 +38,8 @@
             >
               <a
                 class="text-xl flex items-center justify-center w-full h-full"
-                href=""
+                :href="social.to"
+                target="_blank"
               >
                 <Icon :name="social.icon" />
               </a>

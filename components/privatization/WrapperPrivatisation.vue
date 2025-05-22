@@ -1,6 +1,6 @@
 <template>
   <div class="w-full relative transition-all duration-700">
-    <div class="bg py-8 transform md:flex justify-between px-10 items-center">
+    <div class="bg py-8 transform md:flex justify-between px-5 items-center">
       <div class="space-y-4 py-4">
         <Tag text="toute la semaine" class="bg-red text-sm w-fit mx-auto"></Tag>
         <p class="text-white mt-2 font-poppins">
@@ -14,7 +14,7 @@
             >Déplacement entre le 42 et le 69</span
           >
           <span
-            class="bg-light-black text-2xl font-permanent rounded-full px-3 py-1"
+            class="bg-light-black text-xl font-permanent rounded-full px-3 py-1"
           >
             <span class="text-blue">À D</span>
             <span class="text-white">OMI</span>
@@ -25,7 +25,7 @@
 
       <div class="">
         <a
-          href=""
+          href="/contact"
           class="bg-white hover:-rotate-6 w-fit block transition-all transform px-3 py-2 rounded text-base border-2"
           >Nous appeler</a
         >

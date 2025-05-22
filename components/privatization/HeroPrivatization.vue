@@ -23,18 +23,18 @@
       <div class="space-y-4">
         <h2
           v-if="!generatedPage"
-          class="text-4xl text-white font-bold capitalize text-center"
+          class="text-2xl md:text-3xl text-white font-bold text-center"
         >
           {{ data.title }}
         </h2>
         <h2
           v-else
-          class="text-xl md:text-3xl text-white font-bold text-center lg:leading-loose font-poppins"
+          class="text-xl md:text-3xl text-white font-bold text-center leading-loose font-poppins"
         >
           <span class="bg-clay-orange rounded-full px-4">Privatiser</span> un
           <span class="bg-clay-orange rounded-full px-4">food truck</span> pour
           un évènement
-          <span class="text-nowrap" v-html="data.title"></span>
+          <span class="text-nowrap leading-loose" v-html="data.title"></span>
         </h2>
         <span class="text-white block font-poppins text-center"
           >soyez le boss de votre event !</span

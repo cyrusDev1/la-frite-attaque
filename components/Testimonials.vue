@@ -78,18 +78,18 @@ const testimonials = [
 
 onMounted(async () => {
   await nextTick();
-
+  await new Promise((resolve) => setTimeout(resolve, 100)); // petite pause de 50ms
   testimonialRefs.forEach((el) => {
     if (!el) return;
     gsap.fromTo(
       el,
       { x: 0 },
       {
-        x: -500,
+        x: -400,
         scrollTrigger: {
           trigger: el,
-          start: "top bottom",
-          toggleActions: "play none none none",
+          start: "top center",
+          end: "bottom center",
           scrub: true,
         },
         duration: 2,

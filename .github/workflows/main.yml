@@ -46,6 +46,8 @@ jobs:
         run: |
           sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no $USER@$HOST << EOF
             cd /home/lafriteattaque/htdocs/lafriteattaque.fr
+            
+            rm -rf .nuxt
 
             npm install --production
             npm run build

@@ -2,19 +2,19 @@
   <div>
     <HeroPrivatization :data="data"></HeroPrivatization>
     <Domains :link="link"></Domains>
-    <div class="bg-[#131313] px-5 py-10 md:px-28 md:py-16">
+    <div class="bg-light-black px-5 py-10 md:px-28 md:py-16">
       <WrapperPrivatisation></WrapperPrivatisation>
     </div>
     <div class="px-5 md:px-28 pt-10 pb-20 bg-beige">
       <div
-        class="flex justify-center space-x-6"
+        class="flex justify-center md:space-x-3 space-x-6 overflow-x-scroll md:overflow-x-hidden py-2"
         v-if="products && Object.keys(products).length"
       >
         <div v-for="(categoryProducts, categoryName) in products">
           <Link
             :text="categoryName"
             :to="`#${categoryName}`"
-            isolateClass="text-azure border-orange"
+            isolateClass="text-sm md:text-base text-nowrap text-azure border-orange"
           ></Link>
         </div>
       </div>

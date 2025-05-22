@@ -60,11 +60,13 @@ import { onMounted, ref } from "vue";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Wrapper from "./Wrapper.vue";
+gsap.registerPlugin(ScrollTrigger);
 
 const gallery = ref(null);
 
-onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger);
+onMounted(async () => {
+  await nextTick();
+  await new Promise((resolve) => setTimeout(resolve, 100)); // petite pause de 50ms
 
   const images = gallery.value.querySelectorAll("div");
 
@@ -78,8 +80,8 @@ onMounted(() => {
         delay: index * 0.5,
         scrollTrigger: {
           trigger: imgBloc,
-          start: "top 0%",
-          toggleActions: "play none none none",
+          start: "top bottom",
+          end: "bottom top",
           scrub: true,
         },
       },
