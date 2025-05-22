@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://api.lafriteattaque.fr";
 
 export async function get(endpoint) {
   const res = await fetch(`${BASE_URL}/${endpoint}`);
